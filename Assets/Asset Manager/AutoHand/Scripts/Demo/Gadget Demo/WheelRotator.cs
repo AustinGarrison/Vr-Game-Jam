@@ -8,6 +8,7 @@ namespace Autohand.Demo{
         public Transform move;
         public Vector3 angle;
         public bool useLocal = false;
+        public float targetAxis;
         
 
         void Update(){

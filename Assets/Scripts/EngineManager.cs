@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class EngineManager : MonoBehaviour
 {
-    public bool AreEnginesActive { get { return m_AreEnginesOn;  } }
+    public bool AreEnginesActive { get { return m_AreEnginesOn; } }
 
+    public bool startOn = false;
     public Material offMaterial = null;
     public Material onMaterial = null;
     public GameObject onText = null;
@@ -17,7 +18,7 @@ public class EngineManager : MonoBehaviour
 
     private bool m_AreEnginesOn = false;
     private AudioSource audio = null;
-    private bool isActive = false;
+    private bool isActive;
     private MeshRenderer buttonMaterial = null;
     private bool cooldown = false;
 
@@ -26,8 +27,23 @@ public class EngineManager : MonoBehaviour
         audio = GetComponent<AudioSource>();
         buttonMaterial = GetComponentInChildren<MeshRenderer>();
 
-        onText.SetActive(false);
-        offText.SetActive(true);
+        if (startOn)
+        {
+            buttonMaterial.material = onMaterial;
+            onText.SetActive(true);
+            offText.SetActive(false);
+            m_AreEnginesOn = true;
+            isActive = true;
+        }
+        else
+        {
+            m_AreEnginesOn = false;
+            buttonMaterial.material = offMaterial;
+            onText.SetActive(false);
+            offText.SetActive(true);
+            isActive = false;
+        }
+
     }
 
     public void Toggle()
@@ -43,7 +59,7 @@ public class EngineManager : MonoBehaviour
                 ToggleOn();
 
             isActive = !isActive;
-            Invoke("ResetCooldown", 2f);
+            Invoke("ResetCooldown", 1f);
             cooldown = true;
         }
     }

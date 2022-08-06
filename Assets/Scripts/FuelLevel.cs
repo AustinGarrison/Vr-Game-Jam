@@ -5,14 +5,14 @@ public class FuelLevel : MonoBehaviour
 {
     [SerializeField] private EngineManager engineManager;
     [SerializeField] private Image fuelLevelBar;
-    [SerializeField] private float fillAmount;
+    [SerializeField] private float fullAmount;
+
     private float drainAmount;
     public ShipThrottle throttle;
 
     private void Start()
     {
         fuelLevelBar.fillAmount = 1.0f;
-
     }
 
     private void Update()
@@ -37,6 +37,6 @@ public class FuelLevel : MonoBehaviour
     public void DecreaseFuelLevel(float drainAmount)
     {
         if (fuelLevelBar.fillAmount <= 0.1f) return;
-        fuelLevelBar.fillAmount -= drainAmount * Time.deltaTime;
+        fuelLevelBar.fillAmount -= (drainAmount / fullAmount) * Time.deltaTime;
     }
 }

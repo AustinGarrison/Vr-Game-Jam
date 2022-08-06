@@ -14,13 +14,23 @@ public class EngineManager : MonoBehaviour
     public GameObject offText = null;
     public AudioClip onAudio = null;
     public AudioClip offAudio = null;
-    public AudioClip pressSound = null;
+
+    public bool debugToggle = false;
 
     private bool m_AreEnginesOn = false;
     private AudioSource audio = null;
     private bool isActive;
     private MeshRenderer buttonMaterial = null;
     private bool cooldown = false;
+
+    private void Update()
+    {
+        if(debugToggle)
+        {
+            Toggle();
+            debugToggle = false;
+        }
+    }
 
     private void OnEnable()
     {
@@ -50,8 +60,6 @@ public class EngineManager : MonoBehaviour
     {
         if (!cooldown)
         {
-            audio.clip = pressSound;
-            audio.Play();
 
             if (isActive)
                 ToggleOff();

@@ -1,5 +1,4 @@
-//
-//sing Autohand;
+//uSsing Autohand;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

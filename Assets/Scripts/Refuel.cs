@@ -10,6 +10,8 @@ public class Refuel : MonoBehaviour
     public AudioClip pressSound = null;
     public FuelLevel fuelLevel = null;
 
+    public bool debugToggle = false;
+
     private AudioSource audio = null;
     private bool isActive = false;
     private MeshRenderer buttonMaterial = null;
@@ -20,6 +22,15 @@ public class Refuel : MonoBehaviour
         audio = GetComponent<AudioSource>();
         buttonMaterial = GetComponentInChildren<MeshRenderer>();
         buttonMaterial.material = onMaterial;
+    }
+
+    private void Update()
+    {
+        if (debugToggle)
+        {
+            RefuelPressed(4f);
+            debugToggle = false;
+        }
     }
 
     public void RefuelPressed(float amount)
